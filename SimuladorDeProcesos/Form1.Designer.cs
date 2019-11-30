@@ -40,6 +40,7 @@
             this.tabla = new System.Windows.Forms.DataGridView();
             this.comboBox = new System.Windows.Forms.ComboBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.guardar = new System.Windows.Forms.Button();
             this.reiniciar = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
@@ -96,9 +97,9 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(66, 100);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(47, 17);
+            this.label3.Size = new System.Drawing.Size(52, 17);
             this.label3.TabIndex = 3;
-            this.label3.Text = "T. lleg";
+            this.label3.Text = "T. Lleg";
             // 
             // textBox1
             // 
@@ -110,7 +111,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(72, 47);
+            this.label2.Location = new System.Drawing.Point(86, 50);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(21, 17);
             this.label2.TabIndex = 1;
@@ -135,12 +136,12 @@
             // tabla
             // 
             this.tabla.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.tabla.Location = new System.Drawing.Point(109, 414);
+            this.tabla.Location = new System.Drawing.Point(93, 386);
             this.tabla.Name = "tabla";
             this.tabla.ReadOnly = true;
             this.tabla.RowHeadersWidth = 51;
             this.tabla.RowTemplate.Height = 24;
-            this.tabla.Size = new System.Drawing.Size(596, 203);
+            this.tabla.Size = new System.Drawing.Size(593, 203);
             this.tabla.TabIndex = 3;
             // 
             // comboBox
@@ -157,8 +158,8 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.button1);
             this.groupBox2.Controls.Add(this.guardar);
-            this.groupBox2.Controls.Add(this.reiniciar);
             this.groupBox2.Controls.Add(this.comboBox);
             this.groupBox2.Location = new System.Drawing.Point(428, 67);
             this.groupBox2.Name = "groupBox2";
@@ -166,6 +167,16 @@
             this.groupBox2.TabIndex = 4;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Algoritmo";
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(89, 208);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(121, 31);
+            this.button1.TabIndex = 12;
+            this.button1.Text = "Ejecutar!";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 
             // guardar
             // 
@@ -179,9 +190,9 @@
             // 
             // reiniciar
             // 
-            this.reiniciar.Location = new System.Drawing.Point(89, 208);
+            this.reiniciar.Location = new System.Drawing.Point(329, 610);
             this.reiniciar.Name = "reiniciar";
-            this.reiniciar.Size = new System.Drawing.Size(121, 34);
+            this.reiniciar.Size = new System.Drawing.Size(121, 44);
             this.reiniciar.TabIndex = 10;
             this.reiniciar.Text = "Reiniciar";
             this.reiniciar.UseVisualStyleBackColor = true;
@@ -191,8 +202,9 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(751, 668);
+            this.ClientSize = new System.Drawing.Size(765, 666);
             this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.reiniciar);
             this.Controls.Add(this.tabla);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.titulo);
@@ -224,6 +236,7 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button guardar;
         private System.Windows.Forms.Button reiniciar;
+        private System.Windows.Forms.Button button1;
     }
 }
 

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using SimuladorDeProcesos.Logica;
 
 namespace SimuladorDeProcesos
 {
@@ -15,6 +16,7 @@ namespace SimuladorDeProcesos
 
         DataTable modelo;
         int cont = 0;
+        List<Proceso> lista = new List<Proceso>();
 
         public Form1()
         {
@@ -34,18 +36,52 @@ namespace SimuladorDeProcesos
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (comboBox.SelectedIndex == -1)
+            if (comboBox.SelectedIndex == -1 || guardar.Enabled)
             {
                 MessageBox.Show("Seleccione un algoritmo!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             } else
             {
+                lista.Add(new Proceso(textBox1.Text,int.Parse(textBox2.Text),int.Parse(textBox3.Text)));
                 graficar();
                 textBox1.Text = "";
                 textBox2.Text = "";
                 textBox3.Text = "";
+                cont++;
                 
             }
         }
+
+        public void fifo()
+        {
+            lista.OrderBy(x => x.tlleg);
+            int anterior = 0;
+            foreach ( Proceso i in lista)
+            {
+                i.tcom = anterior;
+                i.tfin = anterior + i.tcpu;
+                i.tesp = i.tcom - i.tlleg;
+                anterior = i.tfin;
+            }
+            modelo.Clear();
+            rellenar();
+        }
+
+        private void rellenar()
+        {
+            
+            foreach (Proceso i in lista)
+            {
+                DataRow fila = modelo.NewRow();
+                fila["Proceso"] = i.id;
+                fila["T. Lleg"] = i.tlleg;
+                fila["T. CPU"] = i.tcpu;
+                fila["T. Com"] = i.tcom;
+                fila["T. Fin"] = i.tfin;
+                fila["T. Esp"] = i.tesp;
+                modelo.Rows.Add(fila);
+            }
+        }
+
         private void Iniciar()
         {
             modelo = new DataTable();
@@ -87,8 +123,23 @@ namespace SimuladorDeProcesos
             guardar.Enabled = true;
             comboBox.SelectedIndex = -1;
             modelo.Clear();
+            cont = 0;
         }
 
-     
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            if(cont>3 && cont<7)
+            {
+                MessageBox.Show("Bien!", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                if (comboBox.SelectedIndex == 0)
+                {
+                    fifo();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Ingrese entre 4 y 6 procesos!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 }
