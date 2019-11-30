@@ -43,7 +43,7 @@ namespace SimuladorDeProcesos
                 textBox1.Text = "";
                 textBox2.Text = "";
                 textBox3.Text = "";
-                textBox4.Text = "";
+                
             }
         }
         private void Iniciar()
@@ -53,7 +53,6 @@ namespace SimuladorDeProcesos
             modelo.Columns.Add("Proceso");
             modelo.Columns.Add("T. Lleg");
             modelo.Columns.Add("T. CPU");
-            modelo.Columns.Add("Prioridad");
             modelo.Columns.Add("T. Com");
             modelo.Columns.Add("T. Fin");
             modelo.Columns.Add("T. Esp");
@@ -69,51 +68,27 @@ namespace SimuladorDeProcesos
             DataRow fila = modelo.NewRow();
             fila["Proceso"] = textBox1.Text;
             fila["T. Lleg"] = textBox2.Text;
-            fila["T. CPU"] = textBox3.Text;
-            if (comboBox.SelectedIndex == 2){
-                fila["Prioridad"] = textBox4.Text;
-            }
-            
+            fila["T. CPU"] = textBox3.Text;  
             modelo.Rows.Add(fila);
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            if (comboBox.SelectedIndex != -1)
+            if(comboBox.SelectedIndex!= -1)
             {
-                if (comboBox.SelectedIndex == 0 || comboBox.SelectedIndex == 1)
-                {
-                    label1.Visible = false;
-                    textBox4.Enabled = false;
-                    textBox4.Visible = false;
-                    guardar.Enabled = false;
-               
-                }
-                else
-                {
-                    label1.Visible = true;
-                    textBox4.Enabled = true;
-                    textBox4.Visible = true;
-                    guardar.Enabled = false;
-                }
+                guardar.Enabled = false;
             } else
             {
-                MessageBox.Show("Seleccione un algoritmo!", "Error", MessageBoxButtons.OK,MessageBoxIcon.Error);
+                MessageBox.Show("Seleccione un algoritmo!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         private void button2_Click(object sender, EventArgs e)
         {
-            label1.Visible = true;
-            textBox4.Enabled = true;
             guardar.Enabled = true;
-            textBox4.Visible = true;
             comboBox.SelectedIndex = -1;
             modelo.Clear();
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
+     
     }
 }

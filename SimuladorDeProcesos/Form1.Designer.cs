@@ -37,8 +37,6 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.tabla = new System.Windows.Forms.DataGridView();
             this.comboBox = new System.Windows.Forms.ComboBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -62,9 +60,9 @@
             // 
             // añadir
             // 
-            this.añadir.Location = new System.Drawing.Point(89, 235);
+            this.añadir.Location = new System.Drawing.Point(89, 208);
             this.añadir.Name = "añadir";
-            this.añadir.Size = new System.Drawing.Size(179, 29);
+            this.añadir.Size = new System.Drawing.Size(179, 34);
             this.añadir.TabIndex = 7;
             this.añadir.Text = "Añadir!";
             this.añadir.UseVisualStyleBackColor = true;
@@ -120,8 +118,6 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.textBox4);
-            this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.añadir);
             this.groupBox1.Controls.Add(this.textBox3);
             this.groupBox1.Controls.Add(this.textBox1);
@@ -136,33 +132,16 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Añadir proceso";
             // 
-            // textBox4
-            // 
-            this.textBox4.Location = new System.Drawing.Point(156, 193);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(112, 22);
-            this.textBox4.TabIndex = 9;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(66, 193);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(65, 17);
-            this.label1.TabIndex = 8;
-            this.label1.Text = "Prioridad";
-            // 
             // tabla
             // 
             this.tabla.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.tabla.Location = new System.Drawing.Point(40, 407);
+            this.tabla.Location = new System.Drawing.Point(109, 414);
             this.tabla.Name = "tabla";
             this.tabla.ReadOnly = true;
             this.tabla.RowHeadersWidth = 51;
             this.tabla.RowTemplate.Height = 24;
-            this.tabla.Size = new System.Drawing.Size(691, 203);
+            this.tabla.Size = new System.Drawing.Size(596, 203);
             this.tabla.TabIndex = 3;
-            this.tabla.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // comboBox
             // 
@@ -190,9 +169,9 @@
             // 
             // guardar
             // 
-            this.guardar.Location = new System.Drawing.Point(89, 100);
+            this.guardar.Location = new System.Drawing.Point(89, 119);
             this.guardar.Name = "guardar";
-            this.guardar.Size = new System.Drawing.Size(121, 30);
+            this.guardar.Size = new System.Drawing.Size(121, 35);
             this.guardar.TabIndex = 11;
             this.guardar.Text = "Guardar";
             this.guardar.UseVisualStyleBackColor = true;
@@ -200,7 +179,7 @@
             // 
             // reiniciar
             // 
-            this.reiniciar.Location = new System.Drawing.Point(89, 230);
+            this.reiniciar.Location = new System.Drawing.Point(89, 208);
             this.reiniciar.Name = "reiniciar";
             this.reiniciar.Size = new System.Drawing.Size(121, 34);
             this.reiniciar.TabIndex = 10;
@@ -245,8 +224,6 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button guardar;
         private System.Windows.Forms.Button reiniciar;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.Label label1;
     }
 }
 
