@@ -1,0 +1,11 @@
+C:\Users\Fabian Montes\source\repos\SimuladorDeProcesos\SimuladorDeProcesos\bin\Debug\SimuladorDeProcesos.exe.config
+C:\Users\Fabian Montes\source\repos\SimuladorDeProcesos\SimuladorDeProcesos\bin\Debug\SimuladorDeProcesos.exe
+C:\Users\Fabian Montes\source\repos\SimuladorDeProcesos\SimuladorDeProcesos\bin\Debug\SimuladorDeProcesos.pdb
+C:\Users\Fabian Montes\source\repos\SimuladorDeProcesos\SimuladorDeProcesos\obj\Debug\SimuladorDeProcesos.csprojAssemblyReference.cache
+C:\Users\Fabian Montes\source\repos\SimuladorDeProcesos\SimuladorDeProcesos\obj\Debug\SimuladorDeProcesos.Form1.resources
+C:\Users\Fabian Montes\source\repos\SimuladorDeProcesos\SimuladorDeProcesos\obj\Debug\SimuladorDeProcesos.Properties.Resources.resources
+C:\Users\Fabian Montes\source\repos\SimuladorDeProcesos\SimuladorDeProcesos\obj\Debug\SimuladorDeProcesos.csproj.GenerateResource.cache
+C:\Users\Fabian Montes\source\repos\SimuladorDeProcesos\SimuladorDeProcesos\obj\Debug\SimuladorDeProcesos.exe
+C:\Users\Fabian Montes\source\repos\SimuladorDeProcesos\SimuladorDeProcesos\obj\Debug\SimuladorDeProcesos.pdb
+C:\Users\Fabian Montes\source\repos\SimuladorDeProcesos\SimuladorDeProcesos\bin\Debug\MaterialSkin.dll
+C:\Users\Fabian Montes\source\repos\SimuladorDeProcesos\SimuladorDeProcesos\obj\Debug\SimuladorDeProcesos.csproj.CopyComplete
