@@ -65,6 +65,35 @@ namespace SimuladorDeProcesos
             modelo.Clear();
             rellenar();
         }
+        public void sjf() {
+            lista.OrderBy(x => x.tcpu);
+            int j = buscarComienzo();
+            Proceso p = lista[j];
+            lista.RemoveAt(j);
+            lista.Insert(0, p);
+            int anterior = 0;
+            foreach (Proceso i in lista)
+            {
+                i.tcom = anterior;
+                i.tfin = anterior + i.tcpu;
+                i.tesp = i.tcom - i.tlleg;
+                anterior = i.tfin;
+            }
+            modelo.Clear();
+            rellenar();
+        }
+        public  int buscarComienzo()
+        {
+            int r = 0;
+            for (int i = 0; i < lista.Count; i++)
+            {
+                if (lista[i].tlleg == 0)
+                {
+                    r = i;
+                }
+            }
+            return r;
+        }
 
         private void rellenar()
         {
