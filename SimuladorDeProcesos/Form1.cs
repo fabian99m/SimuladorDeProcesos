@@ -57,11 +57,11 @@ namespace SimuladorDeProcesos
         public void sjf()
         {
             int anterior = 0;
-            int cont = 0;
-            
+           
             var lista2 = lista.OrderBy(x => x.tcpu).ToList();
-            lista2.RemoveAll(x => x.id == Buscarprimero().id);
-            lista2.Insert(0, Buscarprimero());
+            Proceso p = Buscarprimero();
+            lista2.RemoveAll(x => x.id == p.id);
+            lista2.Insert(0, p);
             foreach ( Proceso i in lista2)
             { 
                     i.tcom = anterior;
@@ -72,17 +72,17 @@ namespace SimuladorDeProcesos
             }
             modelo.Clear();
             rellenar();
-            cont++;
         }
         public Proceso Buscarprimero()
         {
-           List<Proceso> aux = new List<Proceso>();
+           Proceso aux = new Proceso();
            
             foreach (Proceso i in  lista.OrderBy(x => x.tlleg).ToList())
             {
-                aux.Add(i);
+                if (i.tlleg==0) {
+                    aux = i; }
             }
-            return aux[0];
+            return aux;
         }
 
         public void fifo()

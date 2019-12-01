@@ -12,6 +12,7 @@ namespace SimuladorDeProcesos.Logica
         public int tfin;
         public int tesp;
 
+        public Proceso() { }
         public Proceso( string id,int tlleg, int tcpu)
         {
             this.tlleg = tlleg;
