@@ -44,6 +44,7 @@ namespace SimuladorDeProcesos
                 lista.Add(new Proceso(textBox1.Text,int.Parse(textBox2.Text),int.Parse(textBox3.Text)));
                 graficar();
                 textBox1.Text = "";
+
                 textBox2.Text = "";
                 textBox3.Text = "";
                 cont++;
