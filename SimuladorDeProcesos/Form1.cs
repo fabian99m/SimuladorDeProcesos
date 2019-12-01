@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using SimuladorDeProcesos.Logica;
 
@@ -36,26 +32,63 @@ namespace SimuladorDeProcesos
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (comboBox.SelectedIndex == -1 || guardar.Enabled)
+            if (!String.IsNullOrEmpty(id.Text) && !String.IsNullOrEmpty(tllegada.Text) && !String.IsNullOrEmpty(tcpu.Text))
             {
-                MessageBox.Show("Seleccione un algoritmo!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                if (comboBox.SelectedIndex == -1 || guardar.Enabled)
+                {
+                    MessageBox.Show("Seleccione un algoritmo!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                {
+                    lista.Add(new Proceso(id.Text, int.Parse(tllegada.Text), int.Parse(tcpu.Text)));
+                    graficar();
+                    id.Text = "";
+                    tllegada.Text = "";
+                    tcpu.Text = "";
+                    cont++;
+
+                }
             } else
             {
-                lista.Add(new Proceso(textBox1.Text,int.Parse(textBox2.Text),int.Parse(textBox3.Text)));
-                graficar();
-                textBox1.Text = "";
-                textBox2.Text = "";
-                textBox3.Text = "";
-                cont++;
+                MessageBox.Show("Ingrese datos!!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        public void sjf()
+        {
+            int anterior = 0;
+            int cont = 0;
+            
+            var lista2 = lista.OrderBy(x => x.tcpu).ToList();
+            lista2.RemoveAll(x => x.id == Buscarprimero().id);
+            lista2.Insert(0, Buscarprimero());
+            foreach ( Proceso i in lista2)
+            { 
+                    i.tcom = anterior;
+                    i.tfin = anterior + i.tcpu;
+                    i.tesp = i.tcom - i.tlleg;
+                    anterior = i.tfin;
                 
             }
+            modelo.Clear();
+            rellenar();
+            cont++;
+        }
+        public Proceso Buscarprimero()
+        {
+           List<Proceso> aux = new List<Proceso>();
+           
+            foreach (Proceso i in  lista.OrderBy(x => x.tlleg).ToList())
+            {
+                aux.Add(i);
+            }
+            return aux[0];
         }
 
         public void fifo()
         {
-            lista.OrderBy(x => x.tlleg);
             int anterior = 0;
-            foreach ( Proceso i in lista)
+            foreach (Proceso i in lista.OrderBy(x => x.tlleg).ToList())
             {
                 i.tcom = anterior;
                 i.tfin = anterior + i.tcpu;
@@ -93,18 +126,16 @@ namespace SimuladorDeProcesos
             modelo.Columns.Add("T. Fin");
             modelo.Columns.Add("T. Esp");
             
-            
             tabla.DataSource = modelo;
-             tabla.AutoResizeColumns();
+            tabla.AutoResizeColumns();
             tabla.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
         }
         private void graficar()
         {
-          
             DataRow fila = modelo.NewRow();
-            fila["Proceso"] = textBox1.Text;
-            fila["T. Lleg"] = textBox2.Text;
-            fila["T. CPU"] = textBox3.Text;  
+            fila["Proceso"] = id.Text;
+            fila["T. Lleg"] = tllegada.Text;
+            fila["T. CPU"] = tcpu.Text;  
             modelo.Rows.Add(fila);
         }
 
@@ -123,6 +154,7 @@ namespace SimuladorDeProcesos
             guardar.Enabled = true;
             comboBox.SelectedIndex = -1;
             modelo.Clear();
+            lista.Clear();
             cont = 0;
         }
 
@@ -135,10 +167,32 @@ namespace SimuladorDeProcesos
                 {
                     fifo();
                 }
+                if(comboBox.SelectedIndex == 1)
+                {
+                    sjf();
+                }
             }
             else
             {
                 MessageBox.Show("Ingrese entre 4 y 6 procesos!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void textBox2_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!(char.IsNumber(e.KeyChar)) && (e.KeyChar != (char)Keys.Back))
+            {
+                e.Handled = true;
+                return;
+            }
+        }
+
+        private void textBox3_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!(char.IsNumber(e.KeyChar)) && (e.KeyChar != (char)Keys.Back))
+            {
+                e.Handled = true;
+                return;
             }
         }
     }

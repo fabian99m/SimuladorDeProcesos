@@ -30,11 +30,11 @@
         {
             this.titulo = new System.Windows.Forms.Label();
             this.añadir = new System.Windows.Forms.Button();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.tcpu = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.tllegada = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.id = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.tabla = new System.Windows.Forms.DataGridView();
@@ -69,12 +69,13 @@
             this.añadir.UseVisualStyleBackColor = true;
             this.añadir.Click += new System.EventHandler(this.button1_Click);
             // 
-            // textBox3
+            // tcpu
             // 
-            this.textBox3.Location = new System.Drawing.Point(156, 147);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(112, 22);
-            this.textBox3.TabIndex = 6;
+            this.tcpu.Location = new System.Drawing.Point(156, 147);
+            this.tcpu.Name = "tcpu";
+            this.tcpu.Size = new System.Drawing.Size(112, 22);
+            this.tcpu.TabIndex = 6;
+            this.tcpu.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox3_KeyPress);
             // 
             // label4
             // 
@@ -85,12 +86,13 @@
             this.label4.TabIndex = 5;
             this.label4.Text = "T. CPU";
             // 
-            // textBox2
+            // tllegada
             // 
-            this.textBox2.Location = new System.Drawing.Point(156, 100);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(112, 22);
-            this.textBox2.TabIndex = 4;
+            this.tllegada.Location = new System.Drawing.Point(156, 100);
+            this.tllegada.Name = "tllegada";
+            this.tllegada.Size = new System.Drawing.Size(112, 22);
+            this.tllegada.TabIndex = 4;
+            this.tllegada.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox2_KeyPress);
             // 
             // label3
             // 
@@ -101,12 +103,12 @@
             this.label3.TabIndex = 3;
             this.label3.Text = "T. Lleg";
             // 
-            // textBox1
+            // id
             // 
-            this.textBox1.Location = new System.Drawing.Point(156, 47);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(112, 22);
-            this.textBox1.TabIndex = 2;
+            this.id.Location = new System.Drawing.Point(156, 47);
+            this.id.Name = "id";
+            this.id.Size = new System.Drawing.Size(112, 22);
+            this.id.TabIndex = 2;
             // 
             // label2
             // 
@@ -120,12 +122,12 @@
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.añadir);
-            this.groupBox1.Controls.Add(this.textBox3);
-            this.groupBox1.Controls.Add(this.textBox1);
+            this.groupBox1.Controls.Add(this.tcpu);
+            this.groupBox1.Controls.Add(this.id);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.textBox2);
+            this.groupBox1.Controls.Add(this.tllegada);
             this.groupBox1.Location = new System.Drawing.Point(40, 67);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(337, 294);
@@ -224,11 +226,11 @@
 
         private System.Windows.Forms.Label titulo;
         private System.Windows.Forms.Button añadir;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox tcpu;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox tllegada;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox id;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.DataGridView tabla;

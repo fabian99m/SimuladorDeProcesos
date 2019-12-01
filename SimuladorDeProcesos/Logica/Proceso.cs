@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace SimuladorDeProcesos.Logica
 {
-    class Proceso 
+    public class Proceso 
     {
         public int tlleg;
         public int tcpu;
