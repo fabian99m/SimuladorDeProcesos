@@ -56,6 +56,13 @@ namespace SimuladorDeProcesos
 
         public void sjf()
         {
+        
+        
+        
+        
+        
+        
+        /*
             int anterior = 0;
            
             var lista2 = lista.OrderBy(x => x.tcpu).ToList();
@@ -72,6 +79,7 @@ namespace SimuladorDeProcesos
             }
             modelo.Clear();
             rellenar();
+            */
         }
         public Proceso Buscarprimero()
         {
