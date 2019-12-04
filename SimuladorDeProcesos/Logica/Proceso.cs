@@ -11,13 +11,15 @@ namespace SimuladorDeProcesos.Logica
         public int tcom;
         public int tfin;
         public int tesp;
+        public Boolean paso;
 
-        public Proceso() { }
+        public Proceso() { this.paso = false; }
         public Proceso( string id,int tlleg, int tcpu)
         {
             this.tlleg = tlleg;
             this.tcpu = tcpu;
             this.id = id;
+            this.paso = false;
         }
 
       

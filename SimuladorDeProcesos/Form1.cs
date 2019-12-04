@@ -56,42 +56,67 @@ namespace SimuladorDeProcesos
 
         public void sjf()
         {
-        
-        
-        
-        
-        
-        
-        /*
+
+            List<Proceso> aux = lista.OrderBy(x => x.tlleg).ToList();
+            int tiempoCpu = aux.FindIndex(x => x.tcpu == 0);
             int anterior = 0;
-           
-            var lista2 = lista.OrderBy(x => x.tcpu).ToList();
-            Proceso p = Buscarprimero();
-            lista2.RemoveAll(x => x.id == p.id);
-            lista2.Insert(0, p);
-            foreach ( Proceso i in lista2)
-            { 
-                    i.tcom = anterior;
-                    i.tfin = anterior + i.tcpu;
-                    i.tesp = i.tcom - i.tlleg;
-                    anterior = i.tfin;
-                
+            List<Proceso> cola = new List<Proceso>();
+
+
+
+            for (int i = 0; i < aux.Count(); i++)
+            {
+                if (aux[i].tlleg == 0)
+                {
+                    aux[i].tcom = anterior;
+                    aux[i].tfin = anterior + aux[i].tcpu;
+                    aux[i].tesp = aux[i].tcom - aux[i].tlleg;
+                    anterior = aux[i].tfin;
+                    aux[i].paso = true;
+                    tiempoCpu = aux[i].tcpu;
+                }
+                else
+                {
+                    Proceso p = menor(aux, tiempoCpu);
+                    p.tcom = anterior;
+                    p.tfin = anterior + p.tcpu;
+                    p.tesp = p.tcom - p.tlleg;
+                    anterior = p.tfin;
+                    p.paso = true;
+                    tiempoCpu += p.tcpu;
+                    aux[aux.FindIndex(x => x.id == p.id)] = p;
+                }
+
             }
+
+            lista = aux;
+
             modelo.Clear();
             rellenar();
-            */
+
         }
-        public Proceso Buscarprimero()
+
+
+
+        public Proceso menor(List<Proceso> a, int b)
         {
-           Proceso aux = new Proceso();
-           
-            foreach (Proceso i in  lista.OrderBy(x => x.tlleg).ToList())
+            Proceso p = new Proceso();
+            int anterior = 99;
+            foreach (Proceso i in a)
             {
-                if (i.tlleg==0) {
-                    aux = i; }
+                if (i.paso == false && i.tcpu < b && i.tlleg <= b)
+                {
+                    if (i.tcpu < anterior)
+                    {
+                        p = i;
+                        anterior = i.tcpu;
+                    }
+                }
             }
-            return aux;
+
+            return p;
         }
+   
 
         public void fifo()
         {
