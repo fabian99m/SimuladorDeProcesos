@@ -13,6 +13,8 @@ namespace SimuladorDeProcesos
         DataTable modelo;
         int cont = 0;
         List<Proceso> lista = new List<Proceso>();
+        List<ProcesoSRTF> listaux= new List<ProcesoSRTF>();
+        List<ProcesoSRTF> lista_srtf = new List<ProcesoSRTF>();
 
         public Form1()
         {
@@ -39,8 +41,16 @@ namespace SimuladorDeProcesos
                     MessageBox.Show("Seleccione un algoritmo!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 else
-                {
-                    lista.Add(new Proceso(id.Text, int.Parse(tllegada.Text), int.Parse(tcpu.Text)));
+                {  
+                    if(comboBox.SelectedIndex==0 || comboBox.SelectedIndex == 1)
+                    {
+                        lista.Add(new Proceso(id.Text, int.Parse(tllegada.Text), int.Parse(tcpu.Text)));
+                    } else
+                    {
+                        lista_srtf.Add(new ProcesoSRTF(id.Text, int.Parse(tllegada.Text), int.Parse(tcpu.Text)));
+                        listaux.Add(new ProcesoSRTF(id.Text, int.Parse(tllegada.Text), int.Parse(tcpu.Text)));
+                    }
+                    
                     graficar();
                     id.Text = "";
                     tllegada.Text = "";
@@ -56,69 +66,138 @@ namespace SimuladorDeProcesos
 
         public void srtf()
         {
-            int tiempoGlobal = 0;
-            int tiempoEsperaTotal = 0;
-            int numProcesosCompletos = 0;
-            Boolean demoroMenos = true;
+           
+            List<ProcesoSRTF> lista_aux = new List<ProcesoSRTF>();
+            lista_aux = lista_srtf;
+            int tiempoT=0;
+            String aux_pro = "";
+            int mini = 9999;
+            String pro_ON = "";
 
-            List<Proceso> aux = lista.OrderBy(x => x.tlleg).ToList();
-
-            while (numProcesosCompletos < aux.Count()) {
-                foreach (Proceso i in aux)
+            foreach (ProcesoSRTF i in lista_srtf) {
+                tiempoT += i.tcpu;
+              
+            }
+           
+            for(int index = 0;index < tiempoT; index++ )
+            {
+                mini = 9999;
+                List<ProcesoSRTF> lista_aux2 = new List<ProcesoSRTF>();
+                foreach(ProcesoSRTF j in lista_aux)
                 {
-                    if (i.tlleg <= tiempoGlobal && i.tcpu > 0)
+                    if (j.tlleg <= index && j.tcpu != 0)
                     {
-                        demoroMenos = true;
-                        foreach (Proceso j in aux)
+                        lista_aux2.Add(j);
+                    }
+                }
+
+                foreach(ProcesoSRTF j in lista_aux2)
+                {
+                    if (j.tcpu < mini)
+                    {
+                        mini = j.tcpu;
+                        aux_pro = j.id;
+                    }
+                }
+
+                foreach(ProcesoSRTF j in lista_aux)
+                {
+                    if (j.id == aux_pro)
+                    {
+                        if(pro_ON == j.id)
                         {
-                            if (j.tcpu < i.tcpu && j.tlleg <= tiempoGlobal && !j.completado)
+                            j.tcpu--;
+                        } else
+                        {
+                         foreach(ProcesoSRTF k in lista_srtf)
                             {
-                                demoroMenos = false;
-
-                                break;
+                                if(k.id == j.id)
+                                {
+                                    k.tcom.Add(index);
+                                } 
+                                if(pro_ON == k.id)
+                                {
+                                    k.tfin.Add(index);
+                                }
                             }
+                            pro_ON = j.id;
+                            j.tcpu--;
                         }
-
-                        if (demoroMenos) {
-
-                            i.tcom = tiempoGlobal;
-                            i.tcpu -= 1;
-
-                            if (i.tfin > 0)
-                            {
-                                i.tesp += (i.tcom - i.tfin);
-                                tiempoEsperaTotal += (i.tcom - i.tfin);
-                            }
-                            else
-                            {
-                                i.tesp += (i.tcom - i.tlleg);
-                                tiempoEsperaTotal += (i.tcom - i.tlleg);
-                            }
-
-                            i.tfin = 1 + tiempoGlobal;
-
-                        }
-
-                    }
-                    if (i.tcpu <= 0 && !i.completado) {
-                        numProcesosCompletos++;
-                        i.completado = true;
-
-                    }
-                    if (demoroMenos)
-                    {
-                        break;
                     }
 
                 }
-                tiempoGlobal += 1;
+                if (tiempoT == index + 1)
+                {
+                    
+                    foreach(ProcesoSRTF j in lista_srtf)
+                    {
+                        if (aux_pro == j.id)
+                        {
+                            j.tfin.Add(index + 1);
+                        }
+                    }
+                }
+               
             }
-            lista = aux;
-            lista = lista.OrderBy(x => x.tlleg).ToList();
-            modelo.Clear();
-            rellenar();
 
+           int  retorno = 0;
+           int a_ = 0; 
+           foreach(ProcesoSRTF j in lista_srtf)
+
+            {
+                //j.tfin.Count();
+               retorno = j.tfin[j.tfin.Count() - 1] - j.tlleg;
+                for (int index = 0; index < j.tcom.Count(); index++)
+                {
+                    a_ += j.tfin[index] - j.tcom[index];
+                }
+                j.tesp = retorno - a_;
+                retorno = 0;
+                a_ = 0;
+
+            }
+
+           int h = 0;
+           foreach (ProcesoSRTF j in listaux)
+            {
+                lista_srtf[h].tcpu = j.tcpu;
+                h++;
+             
+            }
+            //listaux.Clear();
+            //lista_aux.Clear();
+            
+
+            modelo.Clear();
+            rellenarSRTF();
         }
+
+        private void rellenarSRTF()
+        {
+
+            foreach (ProcesoSRTF i in lista_srtf)
+            {
+                DataRow fila = modelo.NewRow();
+                fila["Proceso"] = i.id;
+                fila["T. Lleg"] = i.tlleg;
+                fila["T. CPU"] = i.tcpu;
+                fila["T. Com"] = imprimir(i.tcom);
+                fila["T. Fin"] = imprimir(i.tfin);
+                fila["T. Esp"] = i.tesp;
+                modelo.Rows.Add(fila);
+            }
+        }
+
+        private String imprimir(List <int> p)
+        {
+            String r = "";
+            foreach(int i in p)
+            {
+                r += "" + i + ",";
+            }
+            return r;
+        }
+
 
 
         public void sjf()
@@ -253,7 +332,7 @@ namespace SimuladorDeProcesos
         {
             if(cont>3 && cont<7)
             {
-                MessageBox.Show("Bien!", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+               // MessageBox.Show("Bien!", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 if (comboBox.SelectedIndex == 0)
                 {
                     fifo();
