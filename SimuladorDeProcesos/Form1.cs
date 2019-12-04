@@ -54,16 +54,80 @@ namespace SimuladorDeProcesos
             }
         }
 
+        public void srtf()
+        {
+            int tiempoGlobal = 0;
+            int tiempoEsperaTotal = 0;
+            int numProcesosCompletos = 0;
+            Boolean demoroMenos = true;
+
+            List<Proceso> aux = lista.OrderBy(x => x.tlleg).ToList();
+
+            while (numProcesosCompletos < aux.Count()) {
+                foreach (Proceso i in aux)
+                {
+                    if (i.tlleg <= tiempoGlobal && i.tcpu > 0)
+                    {
+                        demoroMenos = true;
+                        foreach (Proceso j in aux)
+                        {
+                            if (j.tcpu < i.tcpu && j.tlleg <= tiempoGlobal && !j.completado)
+                            {
+                                demoroMenos = false;
+
+                                break;
+                            }
+                        }
+
+                        if (demoroMenos) {
+
+                            i.tcom = tiempoGlobal;
+                            i.tcpu -= 1;
+
+                            if (i.tfin > 0)
+                            {
+                                i.tesp += (i.tcom - i.tfin);
+                                tiempoEsperaTotal += (i.tcom - i.tfin);
+                            }
+                            else
+                            {
+                                i.tesp += (i.tcom - i.tlleg);
+                                tiempoEsperaTotal += (i.tcom - i.tlleg);
+                            }
+
+                            i.tfin = 1 + tiempoGlobal;
+
+                        }
+
+                    }
+                    if (i.tcpu <= 0 && !i.completado) {
+                        numProcesosCompletos++;
+                        i.completado = true;
+
+                    }
+                    if (demoroMenos)
+                    {
+                        break;
+                    }
+
+                }
+                tiempoGlobal += 1;
+            }
+            lista = aux;
+            lista = lista.OrderBy(x => x.tlleg).ToList();
+            modelo.Clear();
+            rellenar();
+
+        }
+
+
         public void sjf()
         {
 
             List<Proceso> aux = lista.OrderBy(x => x.tlleg).ToList();
             int tiempoCpu = aux.FindIndex(x => x.tcpu == 0);
             int anterior = 0;
-            List<Proceso> cola = new List<Proceso>();
-
-
-
+          
             for (int i = 0; i < aux.Count(); i++)
             {
                 if (aux[i].tlleg == 0)
@@ -86,17 +150,12 @@ namespace SimuladorDeProcesos
                     tiempoCpu += p.tcpu;
                     aux[aux.FindIndex(x => x.id == p.id)] = p;
                 }
-
             }
 
             lista = aux;
-
             modelo.Clear();
             rellenar();
-
         }
-
-
 
         public Proceso menor(List<Proceso> a, int b)
         {
@@ -113,7 +172,6 @@ namespace SimuladorDeProcesos
                     }
                 }
             }
-
             return p;
         }
    
@@ -203,6 +261,10 @@ namespace SimuladorDeProcesos
                 if(comboBox.SelectedIndex == 1)
                 {
                     sjf();
+                }
+                if(comboBox.SelectedIndex == 2)
+                {
+                    srtf();
                 }
             }
             else

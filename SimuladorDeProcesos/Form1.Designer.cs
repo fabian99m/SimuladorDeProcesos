@@ -143,7 +143,7 @@
             this.tabla.ReadOnly = true;
             this.tabla.RowHeadersWidth = 51;
             this.tabla.RowTemplate.Height = 24;
-            this.tabla.Size = new System.Drawing.Size(593, 203);
+            this.tabla.Size = new System.Drawing.Size(593, 236);
             this.tabla.TabIndex = 3;
             // 
             // comboBox
@@ -192,7 +192,7 @@
             // 
             // reiniciar
             // 
-            this.reiniciar.Location = new System.Drawing.Point(329, 610);
+            this.reiniciar.Location = new System.Drawing.Point(331, 640);
             this.reiniciar.Name = "reiniciar";
             this.reiniciar.Size = new System.Drawing.Size(121, 44);
             this.reiniciar.TabIndex = 10;
@@ -204,7 +204,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(765, 666);
+            this.ClientSize = new System.Drawing.Size(789, 696);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.reiniciar);
             this.Controls.Add(this.tabla);

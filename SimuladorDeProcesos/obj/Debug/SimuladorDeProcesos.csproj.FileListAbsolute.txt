@@ -19,3 +19,13 @@ C:\Users\Alexis-PC\Source\Repos\fabian99m\SimuladorDeProcesos\SimuladorDeProceso
 C:\Users\Alexis-PC\Source\Repos\fabian99m\SimuladorDeProcesos\SimuladorDeProcesos\obj\Debug\SimuladorDeProcesos.csproj.CopyComplete
 C:\Users\Alexis-PC\Source\Repos\fabian99m\SimuladorDeProcesos\SimuladorDeProcesos\obj\Debug\SimuladorDeProcesos.exe
 C:\Users\Alexis-PC\Source\Repos\fabian99m\SimuladorDeProcesos\SimuladorDeProcesos\obj\Debug\SimuladorDeProcesos.pdb
+C:\Users\Fabian Montes\source\repos\clones\SP\SimuladorDeProcesos\bin\Debug\SimuladorDeProcesos.exe.config
+C:\Users\Fabian Montes\source\repos\clones\SP\SimuladorDeProcesos\bin\Debug\SimuladorDeProcesos.exe
+C:\Users\Fabian Montes\source\repos\clones\SP\SimuladorDeProcesos\bin\Debug\SimuladorDeProcesos.pdb
+C:\Users\Fabian Montes\source\repos\clones\SP\SimuladorDeProcesos\obj\Debug\SimuladorDeProcesos.csprojAssemblyReference.cache
+C:\Users\Fabian Montes\source\repos\clones\SP\SimuladorDeProcesos\obj\Debug\SimuladorDeProcesos.Form1.resources
+C:\Users\Fabian Montes\source\repos\clones\SP\SimuladorDeProcesos\obj\Debug\SimuladorDeProcesos.Properties.Resources.resources
+C:\Users\Fabian Montes\source\repos\clones\SP\SimuladorDeProcesos\obj\Debug\SimuladorDeProcesos.csproj.GenerateResource.cache
+C:\Users\Fabian Montes\source\repos\clones\SP\SimuladorDeProcesos\obj\Debug\SimuladorDeProcesos.csproj.CopyComplete
+C:\Users\Fabian Montes\source\repos\clones\SP\SimuladorDeProcesos\obj\Debug\SimuladorDeProcesos.exe
+C:\Users\Fabian Montes\source\repos\clones\SP\SimuladorDeProcesos\obj\Debug\SimuladorDeProcesos.pdb
