@@ -43,6 +43,8 @@
             this.button1 = new System.Windows.Forms.Button();
             this.guardar = new System.Windows.Forms.Button();
             this.reiniciar = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tabla)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -113,11 +115,12 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(86, 50);
+            this.label2.Location = new System.Drawing.Point(66, 50);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(21, 17);
+            this.label2.Size = new System.Drawing.Size(58, 17);
             this.label2.TabIndex = 1;
-            this.label2.Text = "ID";
+            this.label2.Text = "Nombre";
+            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // groupBox1
             // 
@@ -138,7 +141,7 @@
             // tabla
             // 
             this.tabla.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.tabla.Location = new System.Drawing.Point(93, 386);
+            this.tabla.Location = new System.Drawing.Point(109, 419);
             this.tabla.Name = "tabla";
             this.tabla.ReadOnly = true;
             this.tabla.RowHeadersWidth = 51;
@@ -192,7 +195,7 @@
             // 
             // reiniciar
             // 
-            this.reiniciar.Location = new System.Drawing.Point(331, 640);
+            this.reiniciar.Location = new System.Drawing.Point(336, 670);
             this.reiniciar.Name = "reiniciar";
             this.reiniciar.Size = new System.Drawing.Size(121, 44);
             this.reiniciar.TabIndex = 10;
@@ -200,11 +203,31 @@
             this.reiniciar.UseVisualStyleBackColor = true;
             this.reiniciar.Click += new System.EventHandler(this.button2_Click);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(292, 382);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(89, 17);
+            this.label1.TabIndex = 11;
+            this.label1.Text = "En ejecución";
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(387, 379);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.ReadOnly = true;
+            this.textBox1.Size = new System.Drawing.Size(104, 22);
+            this.textBox1.TabIndex = 12;
+            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(789, 696);
+            this.ClientSize = new System.Drawing.Size(786, 723);
+            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.reiniciar);
             this.Controls.Add(this.tabla);
@@ -239,6 +262,8 @@
         private System.Windows.Forms.Button guardar;
         private System.Windows.Forms.Button reiniciar;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }
 

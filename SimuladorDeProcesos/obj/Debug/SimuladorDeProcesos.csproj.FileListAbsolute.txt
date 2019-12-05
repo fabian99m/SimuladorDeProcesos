@@ -29,3 +29,7 @@ C:\Users\Fabian Montes\source\repos\clones\SP\SimuladorDeProcesos\obj\Debug\Simu
 C:\Users\Fabian Montes\source\repos\clones\SP\SimuladorDeProcesos\obj\Debug\SimuladorDeProcesos.csproj.CopyComplete
 C:\Users\Fabian Montes\source\repos\clones\SP\SimuladorDeProcesos\obj\Debug\SimuladorDeProcesos.exe
 C:\Users\Fabian Montes\source\repos\clones\SP\SimuladorDeProcesos\obj\Debug\SimuladorDeProcesos.pdb
+C:\Users\Fabian Montes\source\repos\clones\SP\SimuladorDeProcesos\bin\Debug\SimuladorDeProcesos.exe.manifest
+C:\Users\Fabian Montes\source\repos\clones\SP\SimuladorDeProcesos\bin\Debug\SimuladorDeProcesos.application
+C:\Users\Fabian Montes\source\repos\clones\SP\SimuladorDeProcesos\obj\Debug\SimuladorDeProcesos.exe.manifest
+C:\Users\Fabian Montes\source\repos\clones\SP\SimuladorDeProcesos\obj\Debug\SimuladorDeProcesos.application

@@ -41,26 +41,23 @@ namespace SimuladorDeProcesos
                     MessageBox.Show("Seleccione un algoritmo!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 else
-                {  
-                    if(comboBox.SelectedIndex==0 || comboBox.SelectedIndex == 1)
-                    {
-                        lista.Add(new Proceso(id.Text, int.Parse(tllegada.Text), int.Parse(tcpu.Text)));
-                    } else
-                    {
-                        lista_srtf.Add(new ProcesoSRTF(id.Text, int.Parse(tllegada.Text), int.Parse(tcpu.Text)));
-                        listaux.Add(new ProcesoSRTF(id.Text, int.Parse(tllegada.Text), int.Parse(tcpu.Text)));
-                    }
-                    
-                    graficar();
-                    id.Text = "";
-                    tllegada.Text = "";
-                    tcpu.Text = "";
-                    cont++;
-
+                {
+                if(comboBox.SelectedIndex==0 || comboBox.SelectedIndex == 1) {
+                lista.Add(new Proceso(id.Text, int.Parse(tllegada.Text), int.Parse(tcpu.Text)));
+                } else {
+                lista_srtf.Add(new ProcesoSRTF(id.Text, int.Parse(tllegada.Text), int.Parse(tcpu.Text)));
+                listaux.Add(new ProcesoSRTF(id.Text, int.Parse(tllegada.Text), int.Parse(tcpu.Text)));
+                 }
+                 graficar();
+                 id.Text = "";
+                 tllegada.Text = "";
+                 tcpu.Text = "";
+                 cont++;
+                  
                 }
             } else
             {
-                MessageBox.Show("Ingrese datos!!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Ingrese datos de procesos!!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -69,30 +66,26 @@ namespace SimuladorDeProcesos
            
             List<ProcesoSRTF> lista_aux = new List<ProcesoSRTF>();
             lista_aux = lista_srtf;
-            int tiempoT=0;
+            int tiempoTotal=0;
             String aux_pro = "";
             int mini = 9999;
             String pro_ON = "";
 
             foreach (ProcesoSRTF i in lista_srtf) {
-                tiempoT += i.tcpu;
-              
+                tiempoTotal += i.tcpu;   
             }
            
-            for(int index = 0;index < tiempoT; index++ )
-            {
+            for(int index = 0;index < tiempoTotal; index++ ) {
                 mini = 9999;
                 List<ProcesoSRTF> lista_aux2 = new List<ProcesoSRTF>();
-                foreach(ProcesoSRTF j in lista_aux)
-                {
+                foreach(ProcesoSRTF j in lista_aux) {
                     if (j.tlleg <= index && j.tcpu != 0)
                     {
                         lista_aux2.Add(j);
                     }
                 }
 
-                foreach(ProcesoSRTF j in lista_aux2)
-                {
+                foreach(ProcesoSRTF j in lista_aux2)  {
                     if (j.tcpu < mini)
                     {
                         mini = j.tcpu;
@@ -100,23 +93,18 @@ namespace SimuladorDeProcesos
                     }
                 }
 
-                foreach(ProcesoSRTF j in lista_aux)
-                {
+                foreach(ProcesoSRTF j in lista_aux) {
                     if (j.id == aux_pro)
                     {
-                        if(pro_ON == j.id)
-                        {
+                        if(pro_ON == j.id) {
                             j.tcpu--;
                         } else
                         {
-                         foreach(ProcesoSRTF k in lista_srtf)
-                            {
-                                if(k.id == j.id)
-                                {
+                         foreach(ProcesoSRTF k in lista_srtf)  {
+                                if(k.id == j.id) {
                                     k.tcom.Add(index);
                                 } 
-                                if(pro_ON == k.id)
-                                {
+                                if(pro_ON == k.id)  {
                                     k.tfin.Add(index);
                                 }
                             }
@@ -126,9 +114,8 @@ namespace SimuladorDeProcesos
                     }
 
                 }
-                if (tiempoT == index + 1)
+                if (tiempoTotal == index + 1)
                 {
-                    
                     foreach(ProcesoSRTF j in lista_srtf)
                     {
                         if (aux_pro == j.id)
@@ -136,70 +123,50 @@ namespace SimuladorDeProcesos
                             j.tfin.Add(index + 1);
                         }
                     }
-                }
-               
+                }        
             }
 
            int  retorno = 0;
-           int a_ = 0; 
+           int aux = 0; 
            foreach(ProcesoSRTF j in lista_srtf)
-
             {
-                //j.tfin.Count();
                retorno = j.tfin[j.tfin.Count() - 1] - j.tlleg;
                 for (int index = 0; index < j.tcom.Count(); index++)
                 {
-                    a_ += j.tfin[index] - j.tcom[index];
+                    aux += j.tfin[index] - j.tcom[index];
                 }
-                j.tesp = retorno - a_;
+                j.tesp = retorno - aux;
                 retorno = 0;
-                a_ = 0;
+                aux = 0;
 
             }
 
            int h = 0;
-           foreach (ProcesoSRTF j in listaux)
-            {
+           foreach (ProcesoSRTF j in listaux) {
                 lista_srtf[h].tcpu = j.tcpu;
                 h++;
-             
             }
-            //listaux.Clear();
-            //lista_aux.Clear();
-            
-
+            listaux.Clear();
             modelo.Clear();
             rellenarSRTF();
         }
 
         private void rellenarSRTF()
         {
-
             foreach (ProcesoSRTF i in lista_srtf)
             {
                 DataRow fila = modelo.NewRow();
                 fila["Proceso"] = i.id;
                 fila["T. Lleg"] = i.tlleg;
                 fila["T. CPU"] = i.tcpu;
-                fila["T. Com"] = imprimir(i.tcom);
-                fila["T. Fin"] = imprimir(i.tfin);
+                fila["T. Com"] = string.Join(" , ", i.tcom.ToArray());
+                fila["T. Fin"] = string.Join(" , ", i.tfin.ToArray());
                 fila["T. Esp"] = i.tesp;
                 modelo.Rows.Add(fila);
             }
         }
 
-        private String imprimir(List <int> p)
-        {
-            String r = "";
-            foreach(int i in p)
-            {
-                r += "" + i + ",";
-            }
-            return r;
-        }
-
-
-
+      
         public void sjf()
         {
 
@@ -325,7 +292,9 @@ namespace SimuladorDeProcesos
             comboBox.SelectedIndex = -1;
             modelo.Clear();
             lista.Clear();
+            lista_srtf.Clear();
             cont = 0;
+            textBox1.Text = "";
         }
 
         private void button1_Click_1(object sender, EventArgs e)
@@ -336,14 +305,17 @@ namespace SimuladorDeProcesos
                 if (comboBox.SelectedIndex == 0)
                 {
                     fifo();
+                    textBox1.Text = "FIFO";
                 }
                 if(comboBox.SelectedIndex == 1)
                 {
                     sjf();
+                    textBox1.Text = "SJF";
                 }
                 if(comboBox.SelectedIndex == 2)
                 {
                     srtf();
+                    textBox1.Text = "SRTF";
                 }
             }
             else
@@ -368,6 +340,16 @@ namespace SimuladorDeProcesos
                 e.Handled = true;
                 return;
             }
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
